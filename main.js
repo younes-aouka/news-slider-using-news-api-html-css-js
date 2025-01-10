@@ -1,4 +1,4 @@
-// first api who use cors restriction you can try it in your local machine
+// first api 
 // 201cc9402332493c914ab17a843ad934
 // Documentation https://newsapi.org/docs/get-started
 // second api:
