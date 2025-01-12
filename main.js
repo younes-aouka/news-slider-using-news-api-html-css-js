@@ -6,13 +6,13 @@
 // https://newsdata.io/documentation/#latest-news
 
 // getting news from the api 
-const lastNews = document.querySelectorAll(".LastNewsSection .news .newsBox");
-
+const news = document.querySelectorAll(".newsBox");
+console.log(news);
 async function getLastestTecNews() {
     let data = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://newsdata.io/api/1/latest?country=us&category=business&language=en&apikey=pub_6502587176810f412d8eb9782929f60d6c347"));
     data = await data.json();
     data = JSON.parse(data.contents);
-    console.log(data)
+    console.log(data);
     return data ;
 }
 
@@ -23,13 +23,13 @@ async function setData() {
     let i,j ;
     i= 0;  // api news index (there is removed news sometimes so i use this as a seperate index to test if the news is removed or not)
     j= 0; //news index for html elements (incrrement when one news is set)
-    while(j<3){
+    while(j<news.length&&i<data.length){
         if((data[i].title === null)||(data[i].image_url === null)){
             i++ ;
         }
         else {
-            lastNews[j].querySelector("a img").src = data[i].image_url;
-            lastNews[j].querySelector("a .newsTitle").textContent = data[i].title;
+            news[j].querySelector("a img").src = data[i].image_url;
+            news[j].querySelector("a .newsTitle").textContent = data[i].title;
             i++ ;
             j++ ;
         }
@@ -38,11 +38,13 @@ async function setData() {
 setData();
 
 // handling animation for the lastest news slider
+const lastNews = [news[0],news[1],news[2]];
 let currentNews = 0 ;
 let NextNews ;
 const moveLeftButton = document.querySelector(".LastNewsSection .news button:first-of-type");
 const moveRightButton = document.querySelector(".LastNewsSection .news button:last-of-type");
 
+// default news animation: slide to right every 4s
 window.setInterval(()=> {
     if((moveRightButton.disabled || moveLeftButton.disabled) !== true){ // this test is to prevent conflict if there is already an animation happening
         moveRight();
