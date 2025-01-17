@@ -18,6 +18,10 @@ img {
     width: 100%;
     height: 100%;
 }
+
+svg {
+    width: 100%;
+}
 /* end of general rules */
 body {
     background-color: #f0f1f3;
@@ -60,6 +64,7 @@ body {
 
 .LastNewsSection .news button {
     position: absolute;
+    z-index: 2;
     top: 50% ;
     transform: translateY(-50%);
     width: 20px;
@@ -71,17 +76,34 @@ body {
 
 .LastNewsSection .news button:first-of-type {
     left: -100px ;
-    background-image: url("angle-left-solid.svg");
 }
 
 .LastNewsSection .news button:last-of-type {
     right: -100px ;
-    background-image: url("angle-right-solid.svg");
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
     .LastNewsSection .news button {
-        display: none;
+        width: 15px;
+        height: 15px;
+    }
+
+    .LastNewsSection .news button:first-of-type {
+        left: -15px ;   
+    }
+
+    .LastNewsSection .news button:last-of-type{
+        right: -15px ;
+    }
+}
+
+@media (max-width: 400px) {
+    .LastNewsSection .news button:first-of-type {
+        left: 10px ;   
+    }
+
+    .LastNewsSection .news button:last-of-type{
+        right: 10px ;
     }
 }
 
@@ -93,6 +115,7 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
+    z-index: 1;
 }
 
 .LastNewsSection .news .newsBox.hideNewsBox {

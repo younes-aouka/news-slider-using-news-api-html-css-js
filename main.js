@@ -7,12 +7,11 @@
 
 // getting news from the api 
 const news = document.querySelectorAll(".newsBox");
-console.log(news);
 async function getLastestTecNews() {
+    // let data = await fetch("https://newsdata.io/api/1/latest?country=us&category=business&language=en&apikey=pub_6502587176810f412d8eb9782929f60d6c347");
     let data = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://newsdata.io/api/1/latest?country=us&category=business&language=en&apikey=pub_6502587176810f412d8eb9782929f60d6c347"));
     data = await data.json();
     data = JSON.parse(data.contents);
-    console.log(data);
     return data ;
 }
 
@@ -20,6 +19,7 @@ async function getLastestTecNews() {
 async function setData() {
     let data = await getLastestTecNews();
     data = data.results ;
+    console.log(data);
     let i,j ;
     i= 0;  // api news index (there is removed news sometimes so i use this as a seperate index to test if the news is removed or not)
     j= 0; //news index for html elements (incrrement when one news is set)
@@ -28,6 +28,7 @@ async function setData() {
             i++ ;
         }
         else {
+            news[j].querySelector("a").href = data[i].link;
             news[j].querySelector("a img").src = data[i].image_url;
             news[j].querySelector("a .newsTitle").textContent = data[i].title;
             i++ ;
